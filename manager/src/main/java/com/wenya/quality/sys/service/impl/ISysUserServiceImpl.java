@@ -82,9 +82,24 @@ public class ISysUserServiceImpl implements ISysUserService {
 
         //构建返回对象
         LoginVo loginVo = new LoginVo();
-        loginVo.setToken(token);
-        loginVo.setRefresh_token("");
+        loginVo.setAccessToken(token);
+        loginVo.setRefreshToken("");
 
         return loginVo;
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param token 令牌
+     * @return {@link SysUser }
+     */
+    @Override
+    public SysUser getUserInfo(String token) {
+        //根据令牌获取用户信息
+        String userJson = stringRedisTemplate.opsForValue().get("user:login" + token);
+
+        //将userJson转换sysUser对象
+        return JSON.parseObject(userJson, SysUser.class);
     }
 }
