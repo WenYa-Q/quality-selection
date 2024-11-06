@@ -1,5 +1,6 @@
 package com.wenya.quality.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.wenya.quality.sys.service.ISysUserService;
 import com.wenya.quality.doamin.system.SysUser;
@@ -41,16 +42,14 @@ public class ISysUserServiceImpl implements ISysUserService {
     public LoginVo login(LoginDto loginDto) {
         //根据用户名和密码查询用户
         SysUser sysUserParam = new SysUser();
-
         //获取用户名
         sysUserParam.setUserName(loginDto.getUserName());
-
         //获取密码
         String password = loginDto.getPassword();
+
         //进行MD5加密
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         sysUserParam.setPassword(md5Password);
-
         if (StringUtils.isEmpty(sysUserParam.getUserName()) || StringUtils.isEmpty(sysUserParam.getPassword())) {
             throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_ERROR);
         }
@@ -61,9 +60,22 @@ public class ISysUserServiceImpl implements ISysUserService {
             throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_ERROR);
         }
 
+        //获取验证码的key
+        String CodeKey = loginDto.getCodeKey();
+        //获取用户输入的验证码
+        String captcha = loginDto.getCaptcha();
+
+        //判断验证码是否正确
+        String redisCode = stringRedisTemplate.opsForValue().get("user:login:validatecode:" + CodeKey);
+        if (StringUtils.isEmpty(redisCode) || ! StrUtil.equalsIgnoreCase(redisCode, captcha)) {
+            throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_ERROR);
+        }
+
+        //删除验证码
+        stringRedisTemplate.delete("user:login:validatecode:" + CodeKey);
+
         //生成令牌
         String token = UUID.randomUUID().toString().replace("-", "");
-
         //保存令牌信息
         stringRedisTemplate.opsForValue().set("user:login" + token,
                 JSON.toJSONString(sysUser), 30, TimeUnit.HOURS);
