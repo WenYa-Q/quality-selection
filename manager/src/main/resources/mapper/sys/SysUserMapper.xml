@@ -7,15 +7,14 @@
         id
         , username, password, name, phone, avatar, description, status, create_time, update_time, is_deleted
     </sql>
+
     <select id="selectSysUserOne" parameterType="SysUser" resultType="SysUser">
         SELECT
         <include refid="sysUserVo"/>
         FROM sys_user
         <where>
-            <if test="userName != null and userName != ''">
-                <if test="password != null and password != ''">
-                    username = #{userName} AND password = #{password}
-                </if>
+            <if test="userName != null and userName != '' or password != null and password != ''">
+                AND username = #{userName} AND password = #{password}
             </if>
         </where>
     </select>

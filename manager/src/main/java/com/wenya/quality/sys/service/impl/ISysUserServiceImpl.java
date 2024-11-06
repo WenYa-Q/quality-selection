@@ -9,6 +9,7 @@ import com.wenya.quality.sys.mapper.SysUserMapper;
 import com.wenya.quality.vo.common.ResultCodeEnum;
 import com.wenya.quality.vo.system.LoginVo;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -49,6 +50,10 @@ public class ISysUserServiceImpl implements ISysUserService {
         //进行MD5加密
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         sysUserParam.setPassword(md5Password);
+
+        if (StringUtils.isEmpty(sysUserParam.getUserName()) || StringUtils.isEmpty(sysUserParam.getPassword())) {
+            throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_ERROR);
+        }
 
         //查询用户
         SysUser sysUser = sysUserMapper.selectSysUserOne(sysUserParam);
