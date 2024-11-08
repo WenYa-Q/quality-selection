@@ -26,4 +26,11 @@ public interface ISysUserService {
      * @return {@link SysUser }
      */
     public SysUser getUserInfo(String token);
+
+    /**
+     * 注销
+     *
+     * @param token 令牌
+     */
+    void logout(String token);
 }
