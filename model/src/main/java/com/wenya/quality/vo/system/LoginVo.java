@@ -8,7 +8,7 @@ import lombok.Data;
 public class LoginVo {
 
     @Schema(description = "令牌")
-    private String accessToken ;
+    private String token ;
 
     @Schema(description = "刷新令牌,可以为空")
     private String refreshToken ;

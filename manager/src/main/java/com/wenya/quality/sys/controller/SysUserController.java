@@ -7,6 +7,7 @@ import com.wenya.quality.log.enums.OperateType;
 import com.wenya.quality.sys.service.ISysUserService;
 import com.wenya.quality.dto.system.LoginDto;
 import com.wenya.quality.sys.service.IValidateCodeService;
+import com.wenya.quality.vo.common.AjaxResult;
 import com.wenya.quality.vo.common.Result;
 import com.wenya.quality.vo.common.ResultCodeEnum;
 import com.wenya.quality.vo.system.LoginVo;
@@ -45,8 +46,8 @@ public class SysUserController {
     @Operation(summary = "用户登录")
     @Log(model = "用户模块", description = "用户登录", opType = OperateType.LOGIN)
     @PostMapping("/login")
-    public Result<LoginVo> login(@RequestBody LoginDto loginDto) {
-        return Result.build(sysUserService.login(loginDto), ResultCodeEnum.SUCCESS);
+    public AjaxResult login(@RequestBody LoginDto loginDto) {
+        return AjaxResult.success(sysUserService.login(loginDto));
     }
 
     /**
@@ -56,8 +57,8 @@ public class SysUserController {
      */
     @GetMapping("/generateValidateCode")
     @Operation(summary = "获取验证码")
-    public Result<ValidateCodeVo> generateValidateCode(){
-        return Result.build(validateCodeService.generateValidateCode(), ResultCodeEnum.SUCCESS);
+    public AjaxResult generateValidateCode(){
+        return AjaxResult.success(validateCodeService.generateValidateCode());
     }
 
     /**
@@ -67,10 +68,26 @@ public class SysUserController {
      */
     @GetMapping("/getUserInfo")
     @Operation(summary = "获取用户信息")
-    public Result<SysUser> getUserInfo(HttpServletRequest request){
-        //从request获取请求头Authorization的数据
-        String token = request.getHeader("Authorization");
+    public AjaxResult getUserInfo(HttpServletRequest request){
+        //从request获取请求头Token的数据
+        String token = request.getHeader("token");
         //获取令牌
-        return Result.build(sysUserService.getUserInfo(token), ResultCodeEnum.SUCCESS);
+        return AjaxResult.success(sysUserService.getUserInfo(token));
+    }
+
+    /**
+     * 注销
+     *
+     * @return {@link Result }
+     */
+    @GetMapping("/logout")
+    @Operation(summary = "注销用户")
+    public AjaxResult logout(HttpServletRequest request){
+        //从request获取请求头Token的数据
+        String token = request.getHeader("Token");
+
+        //注销用户
+        sysUserService.logout(token);
+        return AjaxResult.success();
     }
 }

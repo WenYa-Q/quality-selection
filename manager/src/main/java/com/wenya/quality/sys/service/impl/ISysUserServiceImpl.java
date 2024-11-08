@@ -61,18 +61,18 @@ public class ISysUserServiceImpl implements ISysUserService {
         }
 
         //获取验证码的key
-        String CodeKey = loginDto.getCodeKey();
+        String codeKey = loginDto.getCodeKey();
         //获取用户输入的验证码
         String captcha = loginDto.getCaptcha();
 
         //判断验证码是否正确
-        String redisCode = stringRedisTemplate.opsForValue().get("user:login:validatecode:" + CodeKey);
+        String redisCode = stringRedisTemplate.opsForValue().get("user:login:validatecode:" + codeKey);
         if (StringUtils.isEmpty(redisCode) || ! StrUtil.equalsIgnoreCase(redisCode, captcha)) {
-            throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_ERROR);
+            throw new BusinessCustomizeException(ResultCodeEnum.VALIDATECODE_ERROR);
         }
 
         //删除验证码
-        stringRedisTemplate.delete("user:login:validatecode:" + CodeKey);
+        stringRedisTemplate.delete("user:login:validatecode:" + codeKey);
 
         //生成令牌
         String token = UUID.randomUUID().toString().replace("-", "");
@@ -82,7 +82,7 @@ public class ISysUserServiceImpl implements ISysUserService {
 
         //构建返回对象
         LoginVo loginVo = new LoginVo();
-        loginVo.setAccessToken(token);
+        loginVo.setToken(token);
         loginVo.setRefreshToken("");
 
         return loginVo;
@@ -101,5 +101,15 @@ public class ISysUserServiceImpl implements ISysUserService {
 
         //将userJson转换sysUser对象
         return JSON.parseObject(userJson, SysUser.class);
+    }
+
+    /**
+     * 注销
+     *
+     * @param token 令牌
+     */
+    @Override
+    public void logout(String token) {
+        stringRedisTemplate.delete("user:login" + token);
     }
 }
