@@ -12,10 +12,4 @@ public class LoginVo {
 
     @Schema(description = "刷新令牌,可以为空")
     private String refreshToken ;
-
-    @Schema(description = "过期时间")
-    private Long expires;
-
-    @Schema(description = "token类型")
-    private String tokenType = "String";
 }
