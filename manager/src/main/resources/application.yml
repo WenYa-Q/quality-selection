@@ -19,3 +19,8 @@ mybatis:
   config-location: classpath:/mybatis-config.xml
   mapper-locations: classpath:/mapper/**/**Mapper.xml
   type-aliases-package: com.wenya.quality.doamin
+quality-selection:
+  auth:
+    noAuthUrls:
+      - /sys/user/login
+      - /sys/user/generateValidateCode
