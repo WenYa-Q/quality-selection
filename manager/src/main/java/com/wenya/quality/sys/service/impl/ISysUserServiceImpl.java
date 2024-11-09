@@ -2,6 +2,7 @@ package com.wenya.quality.sys.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.wenya.quality.AuthContextUtil;
 import com.wenya.quality.sys.service.ISysUserService;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.LoginDto;
@@ -91,16 +92,18 @@ public class ISysUserServiceImpl implements ISysUserService {
     /**
      * 获取用户信息
      *
-     * @param token 令牌
+     * @param token 令牌      `
      * @return {@link SysUser }
      */
     @Override
     public SysUser getUserInfo(String token) {
         //根据令牌获取用户信息
-        String userJson = stringRedisTemplate.opsForValue().get("user:login" + token);
+        //String userJson = stringRedisTemplate.opsForValue().get("user:login" + token);
 
+        //从当前线程中获取对象信息
+        SysUser user = AuthContextUtil.getAuthContext();
         //将userJson转换sysUser对象
-        return JSON.parseObject(userJson, SysUser.class);
+        return user;
     }
 
     /**

@@ -9,17 +9,13 @@ import com.wenya.quality.dto.system.LoginDto;
 import com.wenya.quality.sys.service.IValidateCodeService;
 import com.wenya.quality.vo.common.AjaxResult;
 import com.wenya.quality.vo.common.Result;
-import com.wenya.quality.vo.common.ResultCodeEnum;
-import com.wenya.quality.vo.system.LoginVo;
 import com.wenya.quality.vo.system.ValidateCodeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * sys用户控制器
