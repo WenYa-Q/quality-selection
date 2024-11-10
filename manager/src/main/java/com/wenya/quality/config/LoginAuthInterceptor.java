@@ -3,6 +3,8 @@ package com.wenya.quality.config;
 import com.alibaba.fastjson.JSON;
 import com.wenya.quality.AuthContextUtil;
 import com.wenya.quality.doamin.system.SysUser;
+import com.wenya.quality.vo.common.Result;
+import com.wenya.quality.vo.common.ResultCodeEnum;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,6 +13,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,10 +34,9 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
      * @param response 响应
      * @param handler  处理程序
      * @return boolean
-     * @throws Exception 例外
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         //判断是否是跨域请求
         String method = request.getMethod();
         if ("OPTIONS".equals(method)) {
@@ -58,6 +61,23 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
             }
         }
 
+        responseNoLoginInfo(response);
         return false;
+    }
+
+    //响应208状态码给前端
+    private void responseNoLoginInfo(HttpServletResponse response) {
+        Result<Object> result = Result.build(null, ResultCodeEnum.LOGIN_AUTH);
+        PrintWriter writer = null;
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
+        try {
+            writer = response.getWriter();
+            writer.print(JSON.toJSONString(result));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) writer.close();
+        }
     }
 }

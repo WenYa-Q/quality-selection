@@ -9,7 +9,7 @@ import com.wenya.quality.doamin.system.SysUser;
  */
 public class AuthContextUtil {
 
-    private static final ThreadLocal threadLocal = new ThreadLocal();
+    private static final ThreadLocal<SysUser> threadLocal = new ThreadLocal<>();
 
     /**
      * 设置线程上下文
