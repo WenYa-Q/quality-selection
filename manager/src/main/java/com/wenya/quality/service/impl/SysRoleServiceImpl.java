@@ -47,13 +47,24 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int saveSysRole(SysRoleDto sysRoleDto) {
-        int row = 0;
-
         //判断角色名称和编码是否为空
         if (StringUtils.isNotBlank(sysRoleDto.getRoleName()) && StringUtils.isNotEmpty(sysRoleDto.getRoleName())) {
-            row = sysRoleMapper.saveRole(sysRoleDto);
+            sysRoleMapper.saveRole(sysRoleDto);
+            return 1;
         }
 
-        return row;
+        return 0;
+    }
+
+    /**
+     * 更新角色
+     *
+     * @param sysRole sys角色
+     * @return int
+     */
+    @Override
+    public int updateSysRole(SysRole sysRole) {
+        sysRoleMapper.updateSysRole(sysRole);
+        return 1;
     }
 }

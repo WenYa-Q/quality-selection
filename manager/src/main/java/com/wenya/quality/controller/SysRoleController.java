@@ -47,4 +47,16 @@ public class SysRoleController extends BaseController {
     public AjaxResult saveSysRole(@RequestBody SysRoleDto sysRoleDto) {
         return toAjax(sysRoleService.saveSysRole(sysRoleDto));
     }
+
+    /**
+     * 更新角色
+     *
+     * @param sysRole sys角色
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateSysRole")
+    @Operation(summary = "修改用户")
+    public AjaxResult updateSysRole(@RequestBody SysRole sysRole) {
+        return toAjax(sysRoleService.updateSysRole(sysRole));
+    }
 }
