@@ -22,5 +22,5 @@ mybatis:
 quality-selection:
   auth:
     noAuthUrls:
-      - /sys/user/login
-      - /sys/user/generateValidateCode
+      - /login
+      - /generateValidateCode
