@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wenya.quality.system.mapper.SysRoleMapper">
+<mapper namespace="com.wenya.quality.mapper.SysRoleMapper">
     <sql id="sysRoleAllFields">
-        id,role_name,role_code,description,create_time,update_time,is_deleted
+        role_name,role_code,description,create_time,update_time,is_deleted
     </sql>
 
     <select id="selectSysRoleAll" parameterType="sysRole" resultType="sysRole">
@@ -14,4 +14,13 @@
             </if>
         </where>
     </select>
+
+    <insert id="saveRole" parameterType="sysRole">
+        INSERT INTO sys_role
+        <trim suffix="(" prefix=")">
+            <if test="roleName != null and roleName != ''">
+                role_name,
+            </if>
+        </trim>
+    </insert>
 </mapper>

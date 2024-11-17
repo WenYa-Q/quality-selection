@@ -1,6 +1,7 @@
-package com.wenya.quality.system.mapper;
+package com.wenya.quality.mapper;
 
 import com.wenya.quality.doamin.system.SysRole;
+import com.wenya.quality.dto.system.SysRoleDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,5 +15,13 @@ public interface SysRoleMapper {
      * @param sysRole sys角色
      * @return {@link List }<{@link SysRole }>
      */
-    public List<SysRole> selectSysRoleAll(SysRole sysRole);
+    List<SysRole> selectSysRoleAll(SysRole sysRole);
+
+    /**
+     * 保存角色
+     *
+     * @param sysRoleDto sys角色dto
+     * @return int
+     */
+    int saveRole(SysRoleDto sysRoleDto);
 }

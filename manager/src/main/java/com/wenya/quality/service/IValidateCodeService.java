@@ -1,4 +1,4 @@
-package com.wenya.quality.system.service;
+package com.wenya.quality.service;
 
 import com.wenya.quality.vo.system.ValidateCodeVo;
 

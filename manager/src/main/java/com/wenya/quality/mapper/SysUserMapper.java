@@ -1,4 +1,4 @@
-package com.wenya.quality.system.mapper;
+package com.wenya.quality.mapper;
 
 import com.wenya.quality.doamin.system.SysUser;
 import org.apache.ibatis.annotations.Mapper;
