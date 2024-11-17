@@ -10,14 +10,22 @@ public interface ISysRoleService {
     /**
      * 分页查询
      *
-     * @return {@link List }<{@link SysRole }>
+     * @return {@link List }<{@link SysRole }> 分页角色数据集
      */
-    public List<SysRole> findByPage(String roleName);
+    List<SysRole> findByPage(String roleName);
 
     /**
      * 保存sys角色
      *
      * @param sysRoleDto 需要保存的角色
      */
-    public int saveSysRole(SysRoleDto sysRoleDto);
+    int saveSysRole(SysRoleDto sysRoleDto);
+
+    /**
+     * 更新sys角色
+     *
+     * @param sysRole sys角色
+     * @return int
+     */
+    int updateSysRole(SysRole sysRole);
 }

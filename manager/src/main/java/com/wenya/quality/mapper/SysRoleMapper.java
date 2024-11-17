@@ -24,4 +24,11 @@ public interface SysRoleMapper {
      * @return int
      */
     int saveRole(SysRoleDto sysRoleDto);
+
+    /**
+     * 更新角色
+     *
+     * @param sysRole sys角色
+     */
+    void updateSysRole(SysRole sysRole);
 }
