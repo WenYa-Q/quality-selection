@@ -59,4 +59,15 @@ public class SysRoleController extends BaseController {
     public AjaxResult updateSysRole(@RequestBody SysRole sysRole) {
         return toAjax(sysRoleService.updateSysRole(sysRole));
     }
+
+    /**
+     * 根据ID删除角色
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResult deleteById(@PathVariable(value = "id") Long id) {
+        return toAjax(sysRoleService.deleteById(id));
+    }
 }

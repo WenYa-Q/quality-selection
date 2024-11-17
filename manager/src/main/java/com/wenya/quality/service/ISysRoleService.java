@@ -28,4 +28,11 @@ public interface ISysRoleService {
      * @return int
      */
     int updateSysRole(SysRole sysRole);
+
+    /**
+     * 根据ID删除角色
+     *
+     * @param id id
+     */
+    int deleteById(Long id);
 }
