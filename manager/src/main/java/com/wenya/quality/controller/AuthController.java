@@ -4,6 +4,7 @@ import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.LoginDto;
 import com.wenya.quality.log.annotation.Log;
 import com.wenya.quality.log.enums.OperateType;
+import com.wenya.quality.service.IAuthService;
 import com.wenya.quality.service.ISysUserService;
 import com.wenya.quality.service.IValidateCodeService;
 import com.wenya.quality.vo.common.Result;
@@ -12,6 +13,7 @@ import com.wenya.quality.web.domain.AjaxResult;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class AuthController {
     @Resource
-    private ISysUserService sysUserService;
+    private IAuthService authService;
 
     @Resource
     private IValidateCodeService validateCodeService;
@@ -38,7 +40,7 @@ public class AuthController {
     @Log(model = "用户模块", description = "用户登录", opType = OperateType.LOGIN)
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginDto loginDto) {
-        return AjaxResult.success(sysUserService.login(loginDto));
+        return AjaxResult.success(authService.login(loginDto));
     }
 
     /**
@@ -63,7 +65,7 @@ public class AuthController {
         //从request获取请求头Token的数据
         String token = request.getHeader("token");
         //获取令牌
-        return AjaxResult.success(sysUserService.getUserInfo(token));
+        return AjaxResult.success(authService.getUserInfo(token));
     }
 
     /**
@@ -78,7 +80,7 @@ public class AuthController {
         String token = request.getHeader("Token");
 
         //注销用户
-        sysUserService.logout(token);
+        authService.logout(token);
         return AjaxResult.success();
     }
 }
