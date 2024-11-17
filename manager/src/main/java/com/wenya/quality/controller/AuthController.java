@@ -14,6 +14,11 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 登录控制器
+ *
+ * @author wenya
+ */
 @RestController
 @RequestMapping
 public class AuthController {
