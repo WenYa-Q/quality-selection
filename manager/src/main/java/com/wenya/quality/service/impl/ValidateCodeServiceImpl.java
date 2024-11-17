@@ -1,8 +1,8 @@
-package com.wenya.quality.system.service.impl;
+package com.wenya.quality.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
-import com.wenya.quality.system.service.IValidateCodeService;
+import com.wenya.quality.service.IValidateCodeService;
 import com.wenya.quality.vo.system.ValidateCodeVo;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.StringRedisTemplate;

@@ -1,8 +1,9 @@
-package com.wenya.quality.system.service.impl;
+package com.wenya.quality.service.impl;
 
 import com.wenya.quality.doamin.system.SysRole;
-import com.wenya.quality.system.mapper.SysRoleMapper;
-import com.wenya.quality.system.service.ISysRoleService;
+import com.wenya.quality.dto.system.SysRoleDto;
+import com.wenya.quality.mapper.SysRoleMapper;
+import com.wenya.quality.service.ISysRoleService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,22 @@ public class SysRoleServiceImpl implements ISysRoleService {
         }
 
         return sysRoleMapper.selectSysRoleAll(sysRole);
+    }
+
+    /**
+     * 保存角色
+     *
+     * @param sysRoleDto 需要保存的角色
+     */
+    @Override
+    public int saveSysRole(SysRoleDto sysRoleDto) {
+        int row = 0;
+
+        //判断角色名称和编码是否为空
+        if (StringUtils.isNotBlank(sysRoleDto.getRoleName()) && StringUtils.isNotEmpty(sysRoleDto.getRoleName())) {
+            row = sysRoleMapper.saveRole(sysRoleDto);
+        }
+
+        return row;
     }
 }

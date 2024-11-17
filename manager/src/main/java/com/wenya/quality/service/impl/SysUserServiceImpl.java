@@ -1,13 +1,13 @@
-package com.wenya.quality.system.service.impl;
+package com.wenya.quality.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.wenya.quality.AuthContextUtil;
-import com.wenya.quality.system.service.ISysUserService;
+import com.wenya.quality.service.ISysUserService;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.LoginDto;
 import com.wenya.quality.exception.BusinessCustomizeException;
-import com.wenya.quality.system.mapper.SysUserMapper;
+import com.wenya.quality.mapper.SysUserMapper;
 import com.wenya.quality.vo.common.ResultCodeEnum;
 import com.wenya.quality.vo.system.LoginVo;
 import jakarta.annotation.Resource;

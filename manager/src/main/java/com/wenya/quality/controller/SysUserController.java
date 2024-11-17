@@ -1,13 +1,13 @@
-package com.wenya.quality.system.controller;
+package com.wenya.quality.controller;
 
 
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.log.annotation.Log;
 import com.wenya.quality.log.enums.OperateType;
-import com.wenya.quality.system.service.ISysUserService;
+import com.wenya.quality.service.ISysUserService;
 import com.wenya.quality.dto.system.LoginDto;
-import com.wenya.quality.system.service.IValidateCodeService;
-import com.wenya.quality.vo.common.AjaxResult;
+import com.wenya.quality.service.IValidateCodeService;
+import com.wenya.quality.web.domain.AjaxResult;
 import com.wenya.quality.vo.common.Result;
 import com.wenya.quality.vo.system.ValidateCodeVo;
 import io.swagger.v3.oas.annotations.Operation;

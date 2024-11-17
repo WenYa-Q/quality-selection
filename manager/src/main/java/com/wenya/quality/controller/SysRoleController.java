@@ -1,10 +1,12 @@
-package com.wenya.quality.system.controller;
+package com.wenya.quality.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wenya.quality.doamin.system.SysRole;
 import com.wenya.quality.dto.system.SysRoleDto;
-import com.wenya.quality.system.service.ISysRoleService;
+import com.wenya.quality.service.ISysRoleService;
+import com.wenya.quality.web.controller.BaseController;
+import com.wenya.quality.web.domain.AjaxResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -20,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys/role")
 @Tag(name = "角色管理")
-public class SysRoleController {
+public class SysRoleController extends BaseController {
 
     @Resource
     private ISysRoleService sysRoleService;
@@ -34,5 +36,15 @@ public class SysRoleController {
         List<SysRole> sysRoleList = sysRoleService.findByPage(roleName);
 
         return new PageInfo<>(sysRoleList);
+    }
+
+    /**
+     * 保存角色
+     * @return {@link AjaxResult }
+     */
+    @PostMapping("/saveSysRole")
+    @Operation(summary = "添加角色")
+    public AjaxResult saveSysRole(@RequestBody SysRoleDto sysRoleDto) {
+        return toAjax(sysRoleService.saveSysRole(sysRoleDto));
     }
 }

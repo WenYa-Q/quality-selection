@@ -1,8 +1,7 @@
-package com.wenya.quality.vo.common;
+package com.wenya.quality.web.domain;
 
 
 import com.wenya.quality.constant.HttpStatus;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Objects;
