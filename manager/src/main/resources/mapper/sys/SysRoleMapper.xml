@@ -38,4 +38,8 @@
         update_time = now()
         WHERE id = #{id}
     </update>
+
+    <update id="deleteById">
+        UPDATE sys_role SET is_deleted = 1 WHERE id = #{id}
+    </update>
 </mapper>

@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.LinkOption;
 import java.util.List;
 
 /**
@@ -47,13 +48,12 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int saveSysRole(SysRoleDto sysRoleDto) {
+        int row = 0;
         //判断角色名称和编码是否为空
         if (StringUtils.isNotBlank(sysRoleDto.getRoleName()) && StringUtils.isNotEmpty(sysRoleDto.getRoleName())) {
-            sysRoleMapper.saveRole(sysRoleDto);
-            return 1;
+            row = sysRoleMapper.saveRole(sysRoleDto);
         }
-
-        return 0;
+        return row;
     }
 
     /**
@@ -64,7 +64,16 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public int updateSysRole(SysRole sysRole) {
-        sysRoleMapper.updateSysRole(sysRole);
-        return 1;
+        return sysRoleMapper.updateSysRole(sysRole);
+    }
+
+    /**
+     * 根据ID删除角色
+     *
+     * @param id id
+     */
+    @Override
+    public int deleteById(Long id) {
+        return sysRoleMapper.deleteById(id);
     }
 }

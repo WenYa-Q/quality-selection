@@ -30,5 +30,13 @@ public interface SysRoleMapper {
      *
      * @param sysRole sys角色
      */
-    void updateSysRole(SysRole sysRole);
+    int updateSysRole(SysRole sysRole);
+
+    /**
+     * 按id删除 逻辑删除
+     *
+     * @param id id
+     * @return int
+     */
+    int deleteById(Long id);
 }
