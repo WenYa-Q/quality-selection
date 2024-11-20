@@ -1,6 +1,7 @@
 package com.wenya.quality.service.impl;
 
 import com.wenya.quality.doamin.system.SysRole;
+import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysRoleDto;
 import com.wenya.quality.mapper.SysRoleMapper;
 import com.wenya.quality.service.ISysRoleService;

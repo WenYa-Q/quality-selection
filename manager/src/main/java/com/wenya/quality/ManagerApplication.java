@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableSysLogAspect
-@MapperScan("com.wenya.quality")
+@MapperScan("com.wenya.quality.mapper")
 @EnableConfigurationProperties(value = {UserAuthProperties.class})
 @Slf4j
 public class ManagerApplication {

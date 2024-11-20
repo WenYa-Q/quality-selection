@@ -18,6 +18,10 @@ public class BaseEntity implements Serializable {
     private Date createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(description = "结束时间")
+    private Date createTimeEnd;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "修改时间")
     private Date updateTime;
 
