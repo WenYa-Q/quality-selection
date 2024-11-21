@@ -1,25 +1,16 @@
 package com.wenya.quality.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysUserDto;
-import com.wenya.quality.log.annotation.Log;
-import com.wenya.quality.log.enums.OperateType;
 import com.wenya.quality.service.ISysUserService;
-import com.wenya.quality.dto.system.LoginDto;
-import com.wenya.quality.service.IValidateCodeService;
 import com.wenya.quality.web.controller.BaseController;
 import com.wenya.quality.web.domain.AjaxResult;
-import com.wenya.quality.vo.common.Result;
-import com.wenya.quality.vo.system.ValidateCodeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -76,5 +67,17 @@ public class SysUserController extends BaseController {
     @Operation(summary = "更新用户")
     public AjaxResult updateSysUser(@RequestBody SysUser sysUser) {
         return toAjax(sysUserService.updateById(sysUser));
+    }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    @Operation(summary = "删除用户")
+    public AjaxResult deleteById(@PathVariable Long id) {
+        return toAjax(sysUserService.removeById(id));
     }
 }
