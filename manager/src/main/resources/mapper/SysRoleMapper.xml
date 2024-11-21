@@ -6,7 +6,7 @@
         id,role_name,role_code,description,create_time,update_time,is_deleted
     </sql>
 
-    <select id="selectSysRoleAll" parameterType="sysRole" resultType="sysRole">
+    <select id="selectSysRoleAll" parameterType="com.wenya.quality.doamin.system.SysRole" resultType="com.wenya.quality.doamin.system.SysRole">
         SELECT <include refid="sysRoleAllFields"/> FROM sys_role
         <where>
             <if test="roleName != null and roleName != ''">
@@ -15,7 +15,7 @@
         </where>
     </select>
 
-    <insert id="saveRole" parameterType="sysRole">
+    <insert id="saveRole" parameterType="com.wenya.quality.doamin.system.SysRole">
         INSERT INTO sys_role
         <trim suffix="(" prefix=")">
             <if test="roleName != null and roleName != ''">
@@ -24,7 +24,7 @@
         </trim>
     </insert>
 
-    <update id="updateSysRole" parameterType="sysRole">
+    <update id="updateSysRole" parameterType="com.wenya.quality.doamin.system.SysRole">
         UPDATE sys_role SET
         <if test="roleName != null and roleName !=''">
             role_name = #{roleName},

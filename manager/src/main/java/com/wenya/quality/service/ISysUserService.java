@@ -1,5 +1,6 @@
 package com.wenya.quality.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysUserDto;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author wenya
  */
-public interface ISysUserService {
+public interface ISysUserService extends IService<SysUser> {
 
     /**
      * 查询所有用户

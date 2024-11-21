@@ -52,4 +52,10 @@ public class SysUserController extends BaseController {
         List<SysUser> sysUserList = sysUserService.selectSysUser(sysUserDto);
         return new PageInfo<>(sysUserList);
     }
+
+    @PostMapping("/saveSysUser")
+    @Operation(summary = "新增用户")
+    public AjaxResult saveSysUser(@RequestBody SysUser sysUser) {
+        return toAjax(sysUserService.save(sysUser));
+    }
 }
