@@ -1,6 +1,8 @@
 package com.wenya.quality.doamin.base;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,6 +13,7 @@ import java.util.Date;
 @Data
 public class BaseEntity implements Serializable {
 
+    @TableId(value = "id", type = IdType.AUTO)
     @Schema(description = "唯一标识")
     private Long id;
 
