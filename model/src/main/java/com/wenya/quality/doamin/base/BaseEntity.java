@@ -1,5 +1,6 @@
 package com.wenya.quality.doamin.base;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class BaseEntity implements Serializable {
     @Schema(description = "创建时间")
     private Date createTime;
 
+    @TableField(exist = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "结束时间")
     private Date createTimeEnd;

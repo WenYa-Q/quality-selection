@@ -1,5 +1,6 @@
 package com.wenya.quality.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysUserDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author wenya
  */
 @Mapper
-public interface SysUserMapper {
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 查询一个用户
@@ -21,12 +22,4 @@ public interface SysUserMapper {
      * @return {@link SysUser }
      */
     SysUser selectSysUserOne(SysUser sysUser);
-
-    /**
-     * 查询用户
-     *
-     * @param sysUser sys用户
-     * @return {@link List }<{@link SysUser }>
-     */
-    List<SysUser> selectSysUser(SysUser sysUser);
 }
