@@ -24,3 +24,6 @@ quality-selection:
     noAuthUrls:
       - /login
       - /generateValidateCode
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

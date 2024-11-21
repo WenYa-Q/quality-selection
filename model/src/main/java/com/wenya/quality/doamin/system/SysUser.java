@@ -1,6 +1,8 @@
 package com.wenya.quality.doamin.system;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wenya.quality.doamin.base.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,6 +1,7 @@
 package com.wenya.quality.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wenya.quality.doamin.system.SysUser;
@@ -53,9 +54,27 @@ public class SysUserController extends BaseController {
         return new PageInfo<>(sysUserList);
     }
 
+    /**
+     * 保存用户
+     *
+     * @param sysUser sys用户
+     * @return {@link AjaxResult }
+     */
     @PostMapping("/saveSysUser")
     @Operation(summary = "新增用户")
     public AjaxResult saveSysUser(@RequestBody SysUser sysUser) {
         return toAjax(sysUserService.save(sysUser));
+    }
+
+    /**
+     * 更新用户
+     *
+     * @param sysUser sys用户
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateSysUser")
+    @Operation(summary = "更新用户")
+    public AjaxResult updateSysUser(@RequestBody SysUser sysUser) {
+        return toAjax(sysUserService.updateById(sysUser));
     }
 }
