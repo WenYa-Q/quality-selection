@@ -1,13 +1,20 @@
 package com.wenya.quality.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wenya.quality.doamin.system.SysRole;
 import com.wenya.quality.dto.system.SysRoleDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * 角色映射器
+ * Description：
+ *
+ * @author wuqiulin
+ */
 @Mapper
-public interface SysRoleMapper {
+public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     /**
      * 查询所有的角色

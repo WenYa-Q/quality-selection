@@ -1,5 +1,6 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysRole;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysRoleDto;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author wenya
  */
 @Service("sysRoleService")
-public class SysRoleServiceImpl implements ISysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
 
     @Resource
     private SysRoleMapper sysRoleMapper;
