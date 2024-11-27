@@ -27,3 +27,9 @@ quality-selection:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 自定义配置
+minio:
+  endpoint: http://1.94.10.188:9000
+  accessKey: root
+  secretKey: 2470201wu..
+  bucketName: spzx-bucket
