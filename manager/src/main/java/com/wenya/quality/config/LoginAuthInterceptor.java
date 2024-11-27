@@ -77,7 +77,9 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (writer != null) writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 }
