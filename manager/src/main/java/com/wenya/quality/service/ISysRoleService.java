@@ -1,11 +1,18 @@
 package com.wenya.quality.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wenya.quality.doamin.system.SysRole;
 import com.wenya.quality.dto.system.SysRoleDto;
 
 import java.util.List;
 
-public interface ISysRoleService {
+/**
+ * 角色服务
+ * Description：
+ *
+ * @author wuqiulin
+ */
+public interface ISysRoleService extends IService<SysRole> {
 
     /**
      * 分页查询

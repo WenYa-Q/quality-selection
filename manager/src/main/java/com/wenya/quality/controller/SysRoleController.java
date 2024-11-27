@@ -20,7 +20,7 @@ import java.util.List;
  * @author wenya
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/system/sysRole")
 @Tag(name = "角色管理")
 public class SysRoleController extends BaseController {
 
@@ -69,5 +69,11 @@ public class SysRoleController extends BaseController {
     @DeleteMapping("/deleteById/{id}")
     public AjaxResult deleteById(@PathVariable(value = "id") Long id) {
         return toAjax(sysRoleService.deleteById(id));
+    }
+
+    @GetMapping("/findAllRoles")
+    @Operation(summary = "查询所有角色")
+    public AjaxResult findAllRoles() {
+        return AjaxResult.success(sysRoleService.list());
     }
 }
