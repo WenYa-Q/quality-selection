@@ -1,17 +1,24 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysRole;
+import com.wenya.quality.doamin.system.SysRoleUser;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysRoleDto;
 import com.wenya.quality.mapper.SysRoleMapper;
+import com.wenya.quality.mapper.SysUserRoleMapper;
 import com.wenya.quality.service.ISysRoleService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.LinkOption;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 角色权限控制
@@ -23,6 +30,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Resource
     private SysRoleMapper sysRoleMapper;
+
+    @Resource
+    private SysUserRoleMapper sysUserRoleMapper;
 
     /**
      * 分页查询
@@ -77,5 +87,30 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public int deleteById(Long id) {
         return sysRoleMapper.deleteById(id);
+    }
+
+
+    /**
+     * 查找所有角色
+     *
+     * @param id id
+     * @return {@link Map }<{@link String }, {@link Object }>
+     */
+    @Override
+    public Map<String, Object> findAllRoles(Long id) {
+        //获取所有角色
+        List<SysRole> sysRoleList = sysRoleMapper.selectList(null);
+
+        //获取当前系统登录用户的用户配置
+        QueryWrapper<SysRoleUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", id);
+        List<SysRoleUser> sysRoleUserList = sysUserRoleMapper.selectList(queryWrapper);
+        List<Long> sysUserRoleIdList = sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("allRolesList", sysRoleList);
+        data.put("sysUserRoles", sysUserRoleIdList);
+
+        return data;
     }
 }

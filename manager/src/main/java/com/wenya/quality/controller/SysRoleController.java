@@ -71,9 +71,9 @@ public class SysRoleController extends BaseController {
         return toAjax(sysRoleService.deleteById(id));
     }
 
-    @GetMapping("/findAllRoles")
-    @Operation(summary = "查询所有角色")
-    public AjaxResult findAllRoles() {
-        return AjaxResult.success(sysRoleService.list());
+    @GetMapping("/findAllRoles/{id}")
+    @Operation(summary = "查询所有角色和当前系统登录用户的角色配置")
+    public AjaxResult findAllRoles(@PathVariable("id") Long id) {
+        return AjaxResult.success(sysRoleService.findAllRoles(id));
     }
 }

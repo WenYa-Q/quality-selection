@@ -5,6 +5,7 @@ import com.wenya.quality.doamin.system.SysRole;
 import com.wenya.quality.dto.system.SysRoleDto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 角色服务
@@ -42,4 +43,12 @@ public interface ISysRoleService extends IService<SysRole> {
      * @param id id
      */
     int deleteById(Long id);
+
+    /**
+     * 查找所有角色
+     *
+     * @param id id
+     * @return {@link String }
+     */
+    Map<String, Object> findAllRoles(Long id);
 }
