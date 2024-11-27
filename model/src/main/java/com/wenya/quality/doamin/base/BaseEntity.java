@@ -19,6 +19,7 @@ public class BaseEntity implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "创建时间")
+    @TableField(value = "create_time")
     private Date createTime;
 
     @TableField(exist = false)
@@ -28,9 +29,11 @@ public class BaseEntity implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "修改时间")
+    @TableField(value = "update_time")
     private Date updateTime;
 
     @Schema(description = "是否删除")
+    @TableField(value = "is_deleted")
     private Integer isDeleted;
 
 }
