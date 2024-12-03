@@ -2,6 +2,7 @@ package com.wenya.quality.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wenya.quality.doamin.system.SysMenu;
+import com.wenya.quality.vo.system.SysMenuVo;
 
 import java.util.List;
 
@@ -19,4 +20,11 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @return {@link List }<{@link SysMenu }>
      */
     List<SysMenu> findNodes();
+
+    /**
+     * 查找用户菜单列表
+     *
+     * @return {@link String }
+     */
+    List<SysMenuVo> findUserMenuList();
 }

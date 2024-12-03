@@ -66,4 +66,9 @@ public class SysMenuController extends BaseController {
     public AjaxResult removeById(@PathVariable Long id) {
         return success(sysMenuService.removeById(id));
     }
+
+    @GetMapping("/menus")
+    public AjaxResult menus() {
+        return success(sysMenuService.findUserMenuList());
+    }
 }
