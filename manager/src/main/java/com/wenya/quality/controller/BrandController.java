@@ -49,4 +49,15 @@ public class BrandController extends BaseController {
     public AjaxResult save(@RequestBody Brand brand){
         return toAjax(brandService.save(brand));
     }
+
+    /**
+     * 按id更新
+     *
+     * @param brand 品牌
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateById")
+    public AjaxResult updateById(@RequestBody Brand brand){
+        return toAjax(brandService.updateById(brand));
+    }
 }
