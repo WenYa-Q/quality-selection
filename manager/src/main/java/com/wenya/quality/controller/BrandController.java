@@ -60,4 +60,15 @@ public class BrandController extends BaseController {
     public AjaxResult updateById(@RequestBody Brand brand){
         return toAjax(brandService.updateById(brand));
     }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResult deleteById(@PathVariable Long id){
+        return toAjax(brandService.removeById(id));
+    }
 }
