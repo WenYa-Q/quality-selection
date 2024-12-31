@@ -53,7 +53,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             //判断是否存在子节点
             categoryList.forEach(item -> {
                 List<Category> childrenList = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
-                        .eq(Category::getId, item.getId()).eq(Category::getIsDeleted, 0));
+                        .eq(Category::getParentId, item.getId()).eq(Category::getIsDeleted, 0));
                 item.setHasChildren(! CollectionUtils.isEmpty(childrenList));
             });
         }
