@@ -1,7 +1,6 @@
 package com.wenya.quality.controller;
 
 import com.wenya.quality.dto.system.AssginMenuDto;
-import com.wenya.quality.dto.system.AssginRoleDto;
 import com.wenya.quality.service.ISysRoleMenuService;
 import com.wenya.quality.web.controller.BaseController;
 import com.wenya.quality.web.domain.AjaxResult;

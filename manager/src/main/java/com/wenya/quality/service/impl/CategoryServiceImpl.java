@@ -2,7 +2,6 @@ package com.wenya.quality.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.product.Category;
 import com.wenya.quality.listener.ExcelListener;

@@ -1,7 +1,6 @@
 package com.wenya.quality.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.SysUserDto;
@@ -9,7 +8,6 @@ import com.wenya.quality.mapper.SysUserMapper;
 import com.wenya.quality.service.ISysUserService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;

@@ -5,7 +5,6 @@ import com.wenya.quality.dto.system.LoginDto;
 import com.wenya.quality.log.annotation.Log;
 import com.wenya.quality.log.enums.OperateType;
 import com.wenya.quality.service.IAuthService;
-import com.wenya.quality.service.ISysUserService;
 import com.wenya.quality.service.IValidateCodeService;
 import com.wenya.quality.vo.common.Result;
 import com.wenya.quality.vo.system.ValidateCodeVo;
@@ -13,7 +12,6 @@ import com.wenya.quality.web.domain.AjaxResult;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
