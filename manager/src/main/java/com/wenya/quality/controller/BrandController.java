@@ -40,6 +40,16 @@ public class BrandController extends BaseController {
     }
 
     /**
+     * 查找全部
+     *
+     * @return {@link List }<{@link Brand }>
+     */
+    @GetMapping("/findAll")
+    public AjaxResult findAll(){
+        return success(brandService.list(new LambdaQueryWrapper<Brand>().eq(Brand::getIsDeleted, 0)));
+    }
+
+    /**
      * 保存
      *
      * @param brand 品牌
