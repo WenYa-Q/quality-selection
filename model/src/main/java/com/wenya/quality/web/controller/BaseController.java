@@ -1,7 +1,10 @@
 package com.wenya.quality.web.controller;
 
 import com.alibaba.fastjson2.util.DateUtils;
+import com.github.pagehelper.PageInfo;
+import com.wenya.quality.constant.HttpStatus;
 import com.wenya.quality.web.domain.AjaxResult;
+import com.wenya.quality.web.domain.TableDataInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
+import java.util.List;
 
 /**
  * web层通用数据处理
@@ -104,5 +108,19 @@ public class BaseController
     protected AjaxResult toAjax(boolean result)
     {
         return result ? success() : error();
+    }
+
+    /**
+     * 响应请求分页数据
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    protected TableDataInfo getDataTable(List<?> list)
+    {
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.SUCCESS);
+        rspData.setMsg("查询成功");
+        rspData.setRows(list);
+        rspData.setTotal(new PageInfo(list).getTotal());
+        return rspData;
     }
 }
