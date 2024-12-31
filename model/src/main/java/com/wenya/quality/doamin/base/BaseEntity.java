@@ -1,5 +1,6 @@
 package com.wenya.quality.doamin.base;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,9 +11,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
 public class BaseEntity implements Serializable {
 
+    @ExcelProperty(value = "id" ,index = 0)
     @TableId(value = "id", type = IdType.AUTO)
     @Schema(description = "唯一标识")
     private Long id;
@@ -36,4 +37,43 @@ public class BaseEntity implements Serializable {
     @TableField(value = "is_deleted")
     private Integer isDeleted;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 }
