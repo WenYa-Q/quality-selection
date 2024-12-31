@@ -56,4 +56,15 @@ public class ProductSpecController extends BaseController {
     public AjaxResult updateById(@RequestBody ProductSpec productSpec){
         return success(productSpecService.updateById(productSpec));
     }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResult deleteById(@PathVariable Long id){
+        return success(productSpecService.removeById(id));
+    }
 }
