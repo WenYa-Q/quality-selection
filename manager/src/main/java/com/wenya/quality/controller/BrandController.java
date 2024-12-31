@@ -6,12 +6,10 @@ import com.github.pagehelper.PageHelper;
 import com.wenya.quality.doamin.product.Brand;
 import com.wenya.quality.service.IBrandService;
 import com.wenya.quality.web.controller.BaseController;
+import com.wenya.quality.web.domain.AjaxResult;
 import com.wenya.quality.web.domain.TableDataInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,16 @@ public class BrandController extends BaseController {
         List<Brand> list = brandService.list(new LambdaQueryWrapper<Brand>().eq(Brand::getIsDeleted, 0));
 
         return getDataTable(list);
+    }
+
+    /**
+     * 保存
+     *
+     * @param brand 品牌
+     * @return {@link AjaxResult }
+     */
+    @PostMapping("/save")
+    public AjaxResult save(@RequestBody Brand brand){
+        return toAjax(brandService.save(brand));
     }
 }
