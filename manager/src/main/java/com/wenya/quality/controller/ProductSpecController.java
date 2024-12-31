@@ -1,14 +1,13 @@
 package com.wenya.quality.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.wenya.quality.doamin.product.ProductSpec;
 import com.wenya.quality.service.IProductSpecService;
 import com.wenya.quality.web.controller.BaseController;
+import com.wenya.quality.web.domain.AjaxResult;
 import com.wenya.quality.web.domain.TableDataInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 产品规格控制器
@@ -34,5 +33,10 @@ public class ProductSpecController extends BaseController {
     public TableDataInfo findByPage(@PathVariable int page, @PathVariable int limit){
         PageHelper.startPage(page, limit);
         return getDataTable(productSpecService.list());
+    }
+
+    @PostMapping("/save")
+    public AjaxResult save(@RequestBody ProductSpec productSpec){
+        return success(productSpecService.save(productSpec));
     }
 }
