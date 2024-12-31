@@ -48,4 +48,15 @@ public class CategoryBrandController extends BaseController {
     public AjaxResult save(@RequestBody CategoryBrand categoryBrand){
         return success(categoryBrandService.save(categoryBrand));
     }
+
+    /**
+     * 按id更新
+     *
+     * @param categoryBrand 品类品牌
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateById")
+    public AjaxResult updateById(@RequestBody CategoryBrand categoryBrand){
+        return success(categoryBrandService.updateById(categoryBrand));
+    }
 }
