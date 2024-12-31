@@ -1,5 +1,6 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysMenu;
@@ -45,10 +46,10 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         List<SysMenu> menuList = sysMenuService.findNodes();
 
         //获取当前角色关联的菜单
-        List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(new QueryWrapper<SysRoleMenu>()
-                .eq("role_id", id)
-                .eq("is_deleted", 0)
-                .eq("is_half", 0)
+        List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(new LambdaQueryWrapper<SysRoleMenu>()
+                .eq(SysRoleMenu::getId, id)
+                .eq(SysRoleMenu::getIsDeleted, 0)
+                .eq(SysRoleMenu::getIsHalf, 0)
         );
         List<Long> roleMenuIds = sysRoleMenus.stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList());
 
@@ -69,7 +70,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     @Override
     public int doAssign(AssginMenuDto assginMenuDto) {
         //删除当前角色已有的数据
-        sysRoleMenuMapper.delete(new QueryWrapper<SysRoleMenu>().eq("role_id", assginMenuDto.getRoleId()));
+        sysRoleMenuMapper.delete(new LambdaQueryWrapper<SysRoleMenu>().eq(SysRoleMenu::getRoleId, assginMenuDto.getRoleId()));
 
         List<Map<String, Number>> menuIdList = assginMenuDto.getMenuIdList();
         if (menuIdList == null || menuIdList.isEmpty()) {

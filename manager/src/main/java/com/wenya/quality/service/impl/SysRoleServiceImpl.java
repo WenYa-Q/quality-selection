@@ -1,5 +1,6 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysRole;
@@ -102,9 +103,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         List<SysRole> sysRoleList = sysRoleMapper.selectList(null);
 
         //获取当前系统登录用户的用户配置
-        QueryWrapper<SysRoleUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", id);
-        List<SysRoleUser> sysRoleUserList = sysUserRoleMapper.selectList(queryWrapper);
+        List<SysRoleUser> sysRoleUserList = sysUserRoleMapper.selectList(new LambdaQueryWrapper<SysRoleUser>()
+                .eq(SysRoleUser::getUserId, id));
         List<Long> sysUserRoleIdList = sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
 
         Map<String, Object> data = new HashMap<>();
