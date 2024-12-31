@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenya.quality.mapper.CategoryBrandMapper">
+
+    <resultMap id="categoryBrandMap" type="com.wenya.quality.doamin.product.CategoryBrand" autoMapping="true"/>
+
+    <sql id="categoryBrandVo">
+        id, category_id, brand_id, create_time, update_time, is_deleted
+    </sql>
+
+    <select id="findByPage" resultType="com.wenya.quality.doamin.product.CategoryBrand">
+        SELECT categoryBrand.id,
+               categoryBrand.brand_id,
+               categoryBrand.category_id,
+               categoryBrand.create_time,
+               categoryBrand.update_time,
+               categoryBrand.is_deleted,
+               category.name AS categoryName,
+               brand.name    AS brandName,
+               brand.logo
+        FROM category_brand categoryBrand
+                 LEFT JOIN category ON categoryBrand.category_id = category.id
+                 LEFT JOIN brand ON categoryBrand.brand_id = brand.id
+        <where>
+            <if test="brandId != null and brandId != ''">
+                AND categoryBrand.brand_id = #{brandId}
+            </if>
+            <if test="categoryId != null and categoryId != ''">
+                AND categoryBrand.category_id = #{categoryId}
+            </if>
+            AND categoryBrand.is_deleted = 0
+        </where>
+    </select>
+</mapper>
