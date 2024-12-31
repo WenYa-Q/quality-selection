@@ -59,4 +59,15 @@ public class CategoryBrandController extends BaseController {
     public AjaxResult updateById(@RequestBody CategoryBrand categoryBrand){
         return success(categoryBrandService.updateById(categoryBrand));
     }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResult deleteById(@PathVariable Long id){
+        return success(categoryBrandService.removeById(id));
+    }
 }
