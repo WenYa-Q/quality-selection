@@ -1,5 +1,6 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.system.SysRoleUser;
@@ -33,9 +34,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysRo
     @Override
     public void doAssign(AssginRoleDto assginRoleDto) {
         //删除该用户之前的所有角色配置
-        QueryWrapper<SysRoleUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", assginRoleDto.getUserId());
-        sysUserRoleMapper.delete(queryWrapper);
+        sysUserRoleMapper.delete(new LambdaQueryWrapper<SysRoleUser>().eq(SysRoleUser::getUserId, assginRoleDto.getUserId()));
 
         //插入角色配置
 
