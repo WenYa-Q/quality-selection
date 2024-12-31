@@ -35,8 +35,25 @@ public class ProductSpecController extends BaseController {
         return getDataTable(productSpecService.list());
     }
 
+    /**
+     * 保存
+     *
+     * @param productSpec 产品规格
+     * @return {@link AjaxResult }
+     */
     @PostMapping("/save")
     public AjaxResult save(@RequestBody ProductSpec productSpec){
         return success(productSpecService.save(productSpec));
+    }
+
+    /**
+     * 按id更新
+     *
+     * @param productSpec 产品规格
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateById")
+    public AjaxResult updateById(@RequestBody ProductSpec productSpec){
+        return success(productSpecService.updateById(productSpec));
     }
 }
