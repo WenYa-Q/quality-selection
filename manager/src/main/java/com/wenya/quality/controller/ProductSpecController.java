@@ -6,6 +6,8 @@ import com.wenya.quality.service.IProductSpecService;
 import com.wenya.quality.web.controller.BaseController;
 import com.wenya.quality.web.domain.AjaxResult;
 import com.wenya.quality.web.domain.TableDataInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author wuqiulin
  */
+@Tag(name = "商品规格")
 @RestController
 @RequestMapping("/product/productSpec")
 public class ProductSpecController extends BaseController {
@@ -23,12 +26,24 @@ public class ProductSpecController extends BaseController {
     private IProductSpecService productSpecService;
 
     /**
+     * 列表
+     *
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "列表")
+    @GetMapping("/list")
+    public AjaxResult list(){
+        return success(productSpecService.list());
+    }
+
+    /**
      * 按页面查找
      *
      * @param page  第页
      * @param limit 限制
      * @return {@link TableDataInfo }
      */
+    @Operation(summary = "分页查询")
     @GetMapping("/{page}/{limit}")
     public TableDataInfo findByPage(@PathVariable int page, @PathVariable int limit){
         PageHelper.startPage(page, limit);
@@ -41,6 +56,7 @@ public class ProductSpecController extends BaseController {
      * @param productSpec 产品规格
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "新增")
     @PostMapping("/save")
     public AjaxResult save(@RequestBody ProductSpec productSpec){
         return success(productSpecService.save(productSpec));
@@ -52,6 +68,7 @@ public class ProductSpecController extends BaseController {
      * @param productSpec 产品规格
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "修改")
     @PutMapping("/updateById")
     public AjaxResult updateById(@RequestBody ProductSpec productSpec){
         return success(productSpecService.updateById(productSpec));
@@ -63,6 +80,7 @@ public class ProductSpecController extends BaseController {
      * @param id id
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "删除")
     @DeleteMapping("/deleteById/{id}")
     public AjaxResult deleteById(@PathVariable Long id){
         return success(productSpecService.removeById(id));
