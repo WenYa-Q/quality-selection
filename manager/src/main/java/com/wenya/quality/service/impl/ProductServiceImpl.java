@@ -128,4 +128,23 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
         return productDetailsMapper.updateById(productDetails);
     }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return int
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int deleteById(Long id) {
+        //删除商品
+        productMapper.deleteById(id);
+
+        //删除sku
+        productSkuMapper.delete(new LambdaQueryWrapper<ProductSku>().eq(ProductSku::getProductId, id));
+
+        //删除商品详情
+        return productDetailsMapper.delete(new LambdaQueryWrapper<ProductDetails>().eq(ProductDetails::getProductId, id));
+    }
 }

@@ -73,4 +73,15 @@ public class ProductController extends BaseController {
     public AjaxResult updateById(@RequestBody Product product) {
         return success(productService.updateProduct(product));
     }
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResult deleteById(@PathVariable Long id) {
+        return success(productService.deleteById(id));
+    }
 }

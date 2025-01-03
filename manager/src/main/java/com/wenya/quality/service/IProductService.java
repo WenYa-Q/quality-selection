@@ -44,4 +44,12 @@ public interface IProductService extends IService<Product> {
      * @return int
      */
     int updateProduct(Product product);
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return int
+     */
+    int deleteById(Long id);
 }
