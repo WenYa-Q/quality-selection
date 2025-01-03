@@ -8,6 +8,8 @@ import com.wenya.quality.service.IBrandService;
 import com.wenya.quality.web.controller.BaseController;
 import com.wenya.quality.web.domain.AjaxResult;
 import com.wenya.quality.web.domain.TableDataInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import java.util.List;
  *
  * @author wuqiulin
  */
+@Tag(name = "品牌管理")
 @RestController
 @RequestMapping("/product/brand")
 public class BrandController extends BaseController {
@@ -31,6 +34,7 @@ public class BrandController extends BaseController {
      *
      * @return {@link TableInfo }
      */
+    @Operation(summary = "分页查询")
     @GetMapping("/{page}/{limit}")
     public TableDataInfo findByPage(@PathVariable int page, @PathVariable int limit){
         PageHelper.startPage(page, limit);
@@ -44,6 +48,7 @@ public class BrandController extends BaseController {
      *
      * @return {@link List }<{@link Brand }>
      */
+    @Operation(summary = "列表")
     @GetMapping("/findAll")
     public AjaxResult findAll(){
         return success(brandService.list(new LambdaQueryWrapper<Brand>().eq(Brand::getIsDeleted, 0)));
@@ -55,6 +60,7 @@ public class BrandController extends BaseController {
      * @param brand 品牌
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "新增")
     @PostMapping("/save")
     public AjaxResult save(@RequestBody Brand brand){
         return toAjax(brandService.save(brand));
@@ -66,6 +72,7 @@ public class BrandController extends BaseController {
      * @param brand 品牌
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "修改")
     @PutMapping("/updateById")
     public AjaxResult updateById(@RequestBody Brand brand){
         return toAjax(brandService.updateById(brand));
@@ -77,6 +84,7 @@ public class BrandController extends BaseController {
      * @param id id
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "删除")
     @DeleteMapping("/deleteById/{id}")
     public AjaxResult deleteById(@PathVariable Long id){
         return toAjax(brandService.removeById(id));
