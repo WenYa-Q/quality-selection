@@ -1,5 +1,6 @@
 package com.wenya.quality.doamin.product;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.wenya.quality.doamin.base.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -56,9 +57,11 @@ public class Product extends BaseEntity {
 	@Schema(description = "三级分类名称")
 	private String category3Name;			// 三级分类
 
+	@TableField(exist = false)
 	@Schema(description = "sku列表集合")
 	private List<ProductSku> productSkuList;		// sku列表集合
 
+	@TableField(exist = false)
 	@Schema(description = "图片详情列表")
 	private String detailsImageUrls;				// 图片详情列表
 

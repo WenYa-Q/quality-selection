@@ -19,4 +19,13 @@ public interface IProductService extends IService<Product> {
      * @return {@link List }<{@link ? }>
      */
     List<Product> findByPage(ProductDto productDto);
+
+
+    /**
+     * 保存产品
+     *
+     * @param product 产品
+     * @return int
+     */
+    int saveProduct(Product product);
 }
