@@ -36,4 +36,12 @@ public interface IProductService extends IService<Product> {
      * @return {@link Product }
      */
     Product getProductById(Long id);
+
+    /**
+     * 更新产品
+     *
+     * @param product 产品
+     * @return int
+     */
+    int updateProduct(Product product);
 }

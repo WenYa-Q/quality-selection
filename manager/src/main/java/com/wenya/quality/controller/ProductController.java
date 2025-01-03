@@ -61,4 +61,16 @@ public class ProductController extends BaseController {
     public AjaxResult getById(@PathVariable Long id) {
         return success(productService.getProductById(id));
     }
+
+    /**
+     * 按id更新
+     *
+     * @param product 产品
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "根据ID更新商品")
+    @PutMapping("/updateById")
+    public AjaxResult updateById(@RequestBody Product product) {
+        return success(productService.updateProduct(product));
+    }
 }

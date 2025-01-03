@@ -50,8 +50,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
      * @param product 产品
      * @return int
      */
-    @Override
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public int saveProduct(Product product) {
         //设置商品状态
         product.setStatus(0);
@@ -104,5 +104,28 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         product.setDetailsImageUrls(productDetails.getImageUrls());
 
         return product;
+    }
+
+    /**
+     * 更新产品
+     *
+     * @param product 产品
+     * @return int
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int updateProduct(Product product) {
+        //修改商品信息
+        productMapper.updateById(product);
+
+        //修改SKU信息
+        List<ProductSku> productSkuList = product.getProductSkuList();
+        productSkuList.forEach(productSku -> productSkuMapper.updateById(productSku));
+
+        //修改商品详情
+        ProductDetails productDetails = productDetailsMapper.selectById(product.getId());
+        productDetails.setImageUrls(product.getDetailsImageUrls());
+
+        return productDetailsMapper.updateById(productDetails);
     }
 }
