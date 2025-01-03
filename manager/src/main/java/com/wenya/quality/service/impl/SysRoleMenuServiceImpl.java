@@ -46,7 +46,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
 
         //获取当前角色关联的菜单
         List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(new LambdaQueryWrapper<SysRoleMenu>()
-                .eq(SysRoleMenu::getId, id)
+                .eq(SysRoleMenu::getRoleId, id)
                 .eq(SysRoleMenu::getIsDeleted, 0)
                 .eq(SysRoleMenu::getIsHalf, 0)
         );
