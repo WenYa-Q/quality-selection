@@ -70,4 +70,15 @@ public class CategoryBrandController extends BaseController {
     public AjaxResult deleteById(@PathVariable Long id){
         return success(categoryBrandService.removeById(id));
     }
+
+    /**
+     * 按类别id查找品牌
+     *
+     * @param categoryId 类别id
+     * @return {@link AjaxResult }
+     */
+    @GetMapping("/findBrandByCategoryId/{categoryId}")
+    public AjaxResult findBrandByCategoryId(@PathVariable Long categoryId) {
+        return success(categoryBrandService.findBrandByCategoryId(categoryId));
+    }
 }

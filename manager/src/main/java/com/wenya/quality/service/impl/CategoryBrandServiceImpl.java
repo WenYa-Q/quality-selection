@@ -33,4 +33,15 @@ public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, C
     public List<CategoryBrand> findByPage(CategoryBrandDto categoryBrandDto) {
         return categoryBrandMapper.findByPage(categoryBrandDto);
     }
+
+    /**
+     * 按类别id查找品牌
+     *
+     * @param categoryId 类别id
+     * @return {@link List }<{@link CategoryBrand }>
+     */
+    @Override
+    public List<CategoryBrand> findBrandByCategoryId(Long categoryId) {
+        return categoryBrandMapper.findBrandByCategoryId(categoryId);
+    }
 }

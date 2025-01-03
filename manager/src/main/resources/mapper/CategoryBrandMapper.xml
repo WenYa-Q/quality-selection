@@ -32,4 +32,13 @@
             AND categoryBrand.is_deleted = 0
         </where>
     </select>
+
+    <select id="findBrandByCategoryId" resultType="com.wenya.quality.doamin.product.CategoryBrand">
+        SELECT brand.*
+        FROM category_brand
+                 LEFT JOIN brand ON category_brand.brand_id = brand.id
+        WHERE category_id = #{categoryId}
+          AND category_brand.is_deleted = 0
+        order by category_brand.id desc
+    </select>
 </mapper>

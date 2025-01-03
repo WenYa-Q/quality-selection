@@ -22,4 +22,12 @@ public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
      * @return {@link List }<{@link CategoryBrand }>
      */
     List<CategoryBrand> findByPage(CategoryBrandDto categoryBrandDto);
+
+    /**
+     * 按类别id查找品牌
+     *
+     * @param categoryId 类别id
+     * @return {@link List }<{@link CategoryBrand }>
+     */
+    List<CategoryBrand> findBrandByCategoryId(Long categoryId);
 }
