@@ -33,7 +33,7 @@
         </where>
     </select>
 
-    <select id="findBrandByCategoryId" resultType="com.wenya.quality.doamin.product.CategoryBrand">
+    <select id="findBrandByCategoryId" resultType="com.wenya.quality.doamin.product.Brand">
         SELECT brand.*
         FROM category_brand
                  LEFT JOIN brand ON category_brand.brand_id = brand.id

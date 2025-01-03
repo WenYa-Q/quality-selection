@@ -1,6 +1,7 @@
 package com.wenya.quality.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wenya.quality.doamin.product.Brand;
 import com.wenya.quality.doamin.product.CategoryBrand;
 import com.wenya.quality.dto.product.CategoryBrandDto;
 
@@ -27,5 +28,5 @@ public interface ICategoryBrandService extends IService<CategoryBrand> {
      * @param categoryId 类别id
      * @return {@link List }<{@link CategoryBrand }>
      */
-    List<CategoryBrand> findBrandByCategoryId(Long categoryId);
+    List<Brand> findBrandByCategoryId(Long categoryId);
 }

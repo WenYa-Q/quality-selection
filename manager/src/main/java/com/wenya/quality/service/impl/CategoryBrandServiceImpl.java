@@ -1,6 +1,7 @@
 package com.wenya.quality.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wenya.quality.doamin.product.Brand;
 import com.wenya.quality.doamin.product.CategoryBrand;
 import com.wenya.quality.dto.product.CategoryBrandDto;
 import com.wenya.quality.mapper.CategoryBrandMapper;
@@ -41,7 +42,7 @@ public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, C
      * @return {@link List }<{@link CategoryBrand }>
      */
     @Override
-    public List<CategoryBrand> findBrandByCategoryId(Long categoryId) {
+    public List<Brand> findBrandByCategoryId(Long categoryId) {
         return categoryBrandMapper.findBrandByCategoryId(categoryId);
     }
 }

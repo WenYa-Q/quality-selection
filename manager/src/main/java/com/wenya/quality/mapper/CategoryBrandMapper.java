@@ -1,6 +1,7 @@
 package com.wenya.quality.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wenya.quality.doamin.product.Brand;
 import com.wenya.quality.doamin.product.CategoryBrand;
 import com.wenya.quality.dto.product.CategoryBrandDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,5 +30,5 @@ public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
      * @param categoryId 类别id
      * @return {@link List }<{@link CategoryBrand }>
      */
-    List<CategoryBrand> findBrandByCategoryId(Long categoryId);
+    List<Brand> findBrandByCategoryId(Long categoryId);
 }
