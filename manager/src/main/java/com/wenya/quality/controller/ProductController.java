@@ -38,7 +38,6 @@ public class ProductController extends BaseController {
         return getDataTable(productService.findByPage(productDto));
     }
 
-
     /**
      * 保存
      *
@@ -49,5 +48,17 @@ public class ProductController extends BaseController {
     @PostMapping("/save")
     public AjaxResult save(@RequestBody Product product) {
         return toAjax(productService.saveProduct(product));
+    }
+
+    /**
+     * 根据id获取商品详情
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "根据id获取商品详情")
+    @GetMapping("/getById/{id}")
+    public AjaxResult getById(@PathVariable Long id) {
+        return success(productService.getProductById(id));
     }
 }

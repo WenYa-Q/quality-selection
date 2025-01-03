@@ -1,5 +1,6 @@
 package com.wenya.quality.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.quality.doamin.product.Product;
 import com.wenya.quality.doamin.product.ProductDetails;
@@ -78,5 +79,30 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         productDetails.setImageUrls(product.getDetailsImageUrls());
 
         return productDetailsMapper.insert(productDetails);
+    }
+
+    /**
+     * 按id获取产品
+     *
+     * @param id id
+     * @return {@link Product }
+     */
+    @Override
+    public Product getProductById(Long id) {
+        //获取商品数据
+        Product product = productMapper.selectById(id);
+
+        //获取sku数据
+        List<ProductSku> productSkus = productSkuMapper.selectList(new LambdaQueryWrapper<ProductSku>().eq(ProductSku::getProductId, id)
+                .eq(ProductSku::getIsDeleted, 0));
+
+        //获取商品详情
+        ProductDetails productDetails = productDetailsMapper.selectOne(new LambdaQueryWrapper<ProductDetails>().eq(ProductDetails::getProductId, id)
+                .eq(ProductDetails::getIsDeleted, 0));
+
+        product.setProductSkuList(productSkus);
+        product.setDetailsImageUrls(productDetails.getImageUrls());
+
+        return product;
     }
 }

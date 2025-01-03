@@ -28,4 +28,12 @@ public interface IProductService extends IService<Product> {
      * @return int
      */
     int saveProduct(Product product);
+
+    /**
+     * 按id获取产品
+     *
+     * @param id id
+     * @return {@link Product }
+     */
+    Product getProductById(Long id);
 }
