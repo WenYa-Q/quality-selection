@@ -84,4 +84,17 @@ public class ProductController extends BaseController {
     public AjaxResult deleteById(@PathVariable Long id) {
         return success(productService.deleteById(id));
     }
+
+
+    /**
+     * 更新审核状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return {@link AjaxResult }
+     */
+    @PutMapping("/updateStatus/{id}/{status}")
+    public AjaxResult updateAuditStatus(@PathVariable Long id, @PathVariable Integer status) {
+        return success(productService.updateAuditStatus(id, status));
+    }
 }

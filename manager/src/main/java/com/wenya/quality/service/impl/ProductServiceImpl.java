@@ -147,4 +147,28 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         //删除商品详情
         return productDetailsMapper.delete(new LambdaQueryWrapper<ProductDetails>().eq(ProductDetails::getProductId, id));
     }
+
+    /**
+     * 更新审核状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return int
+     */
+    @Override
+    public int updateAuditStatus(Long id, Integer status) {
+        Product product = new Product();
+        product.setId(id);
+
+        //审核状态
+        if (status == 1) {
+            product.setAuditStatus(1);
+            product.setAuditMessage("审核通过");
+        } else if (status == -1) {
+            product.setAuditStatus(-1);
+            product.setAuditMessage("审核不通过");
+        }
+
+        return productMapper.updateById(product);
+    }
 }

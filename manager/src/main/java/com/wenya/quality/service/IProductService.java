@@ -52,4 +52,13 @@ public interface IProductService extends IService<Product> {
      * @return int
      */
     int deleteById(Long id);
+
+    /**
+     * 更新审核状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return int
+     */
+    int updateAuditStatus(Long id, Integer status);
 }
