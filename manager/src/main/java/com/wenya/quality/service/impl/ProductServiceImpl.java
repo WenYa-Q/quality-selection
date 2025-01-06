@@ -171,4 +171,25 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
         return productMapper.updateById(product);
     }
+
+    /**
+     * 更新上下架状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return int
+     */
+    @Override
+    public int updateStatus(Long id, Integer status) {
+        Product product = new Product();
+        product.setId(id);
+
+        if (status == 1){
+            product.setStatus(1);
+        }else {
+            product.setStatus(-1);
+        }
+
+        return productMapper.updateById(product);
+    }
 }

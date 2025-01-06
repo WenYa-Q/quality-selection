@@ -93,8 +93,22 @@ public class ProductController extends BaseController {
      * @param status 状态
      * @return {@link AjaxResult }
      */
+    @Operation(summary = "更新审核状态")
     @PutMapping("/updateStatus/{id}/{status}")
     public AjaxResult updateAuditStatus(@PathVariable Long id, @PathVariable Integer status) {
         return success(productService.updateAuditStatus(id, status));
+    }
+
+    /**
+     * 更新商品上下架状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "更新上下架状态")
+    @GetMapping("/updateStatus/{id}/{status}")
+    public AjaxResult updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+        return success(productService.updateStatus(id, status));
     }
 }

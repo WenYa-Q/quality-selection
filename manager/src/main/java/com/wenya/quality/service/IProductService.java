@@ -61,4 +61,13 @@ public interface IProductService extends IService<Product> {
      * @return int
      */
     int updateAuditStatus(Long id, Integer status);
+
+    /**
+     * 更新上下架状态
+     *
+     * @param id     id
+     * @param status 状态
+     * @return int
+     */
+    int updateStatus(Long id, Integer status);
 }
