@@ -2,8 +2,6 @@ package com.wenya.quality.controller;
 
 import com.wenya.quality.doamin.system.SysUser;
 import com.wenya.quality.dto.system.LoginDto;
-import com.wenya.quality.log.annotation.Log;
-import com.wenya.quality.log.enums.OperateType;
 import com.wenya.quality.service.IAuthService;
 import com.wenya.quality.service.IValidateCodeService;
 import com.wenya.quality.vo.common.Result;
@@ -35,7 +33,6 @@ public class AuthController {
      * @return {@link Result }<{@link ? }> 结果信息
      */
     @Operation(summary = "用户登录")
-    @Log(model = "用户模块", description = "用户登录", opType = OperateType.LOGIN)
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginDto loginDto) {
         return AjaxResult.success(authService.login(loginDto));

@@ -1,6 +1,7 @@
 package com.wenya.quality.log.annotation;
 
 import com.wenya.quality.log.enums.OperateType;
+import com.wenya.quality.log.enums.OperatorType;
 
 import java.lang.annotation.*;
 
@@ -24,6 +25,13 @@ public @interface Log {
      * @return {@link String }
      */
     String description() default "";
+
+    /**
+     * 操作人类型
+     *
+     * @return {@link OperatorType }
+     */
+    OperatorType operatorType() default OperatorType.MANAGE;
 
     /**
      * 模块名称
