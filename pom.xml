@@ -20,6 +20,7 @@
         <module>quality-manager</module>
         <module>quality-service</module>
         <module>quality-api</module>
+        <module>quality-gateway</module>
     </modules>
 
     <properties>
