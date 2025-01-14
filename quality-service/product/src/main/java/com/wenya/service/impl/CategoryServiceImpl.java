@@ -7,6 +7,7 @@ import com.wenya.mapper.CategoryMapper;
 import com.wenya.quality.doamin.product.Category;
 import com.wenya.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      *
      * @return {@link List }<{@link Category }>
      */
+    @Cacheable(value = "category" , key = "'all'")
     @Override
     public List<Category> findCategoryTree() {
         //获取所有数据
