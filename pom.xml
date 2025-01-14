@@ -15,10 +15,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>common</module>
-        <module>model</module>
-        <module>manager</module>
-        <module>service</module>
+        <module>quality-common</module>
+        <module>quality-model</module>
+        <module>quality-manager</module>
+        <module>quality-service</module>
+        <module>quality-api</module>
     </modules>
 
     <properties>
