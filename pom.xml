@@ -21,6 +21,7 @@
         <module>quality-service</module>
         <module>quality-api</module>
         <module>quality-gateway</module>
+        <module>quality-service/service-user</module>
     </modules>
 
     <properties>
