@@ -2,6 +2,7 @@ package com.wenya.service;
 
 import com.wenya.quality.doamin.product.ProductSku;
 import com.wenya.quality.dto.h5.ProductSkuDto;
+import com.wenya.quality.vo.h5.ProductItemVo;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface IProductService {
      * @return {@link String }
      */
     List<ProductSku> findByPage(int page, int limit, ProductSkuDto productSkuDto);
+
+    ProductItemVo getProductDetails(Long id);
 }

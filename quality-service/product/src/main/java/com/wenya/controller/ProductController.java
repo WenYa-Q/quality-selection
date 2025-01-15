@@ -38,4 +38,16 @@ public class ProductController extends BaseController {
     public AjaxResult findByPage(@PathVariable("page") int page, @PathVariable("limit") int limit, ProductSkuDto productSkuDto) {
         return AjaxResult.success(productService.findByPage(page, limit, productSkuDto));
     }
+
+    /**
+     * 获取产品详细信息
+     *
+     * @param id id
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "商品详情")
+    @GetMapping("/item/{id}")
+    public AjaxResult getProductDetails(@PathVariable("id") Long id) {
+        return AjaxResult.success(productService.getProductDetails(id));
+    }
 }
