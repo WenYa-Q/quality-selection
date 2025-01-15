@@ -12,7 +12,7 @@
     <artifactId>quality-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>product</module>
+        <module>service-product</module>
     </modules>
 
     <properties>
