@@ -35,7 +35,7 @@ public class IndexServiceImpl implements IndexService {
      */
     @Override
     public List<IndexVo> findAllData() {
-        List<Category> categoryList = categoryMapper.selectList(new LambdaQueryWrapper<Category>().eq(Category::getParentId, 1)
+        List<Category> categoryList = categoryMapper.selectList(new LambdaQueryWrapper<Category>().eq(Category::getParentId, 0)
                 .eq(Category::getStatus, 1)
                 .eq(Category::getIsDeleted, 0)
                 .orderByAsc(Category::getOrderNum));

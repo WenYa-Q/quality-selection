@@ -8,7 +8,7 @@
         id,sku_code,sku_name,product_id,thumb_img,sale_price,market_price,cost_price,stock_num,sale_num,sku_spec,weight,volume,status,create_time,update_time,is_deleted
     </sql>
 
-    <select id="findProductSkuBySale" resultType="com.wenya.quality.doamin.product.ProductSku">
+    <select id="findProductSkuBySale" resultMap="productSkuMap">
         SELECT sku.id,
                sku.sku_code,
                sku.sku_name,
