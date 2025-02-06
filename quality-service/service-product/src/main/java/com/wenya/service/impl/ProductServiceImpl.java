@@ -89,4 +89,15 @@ public class ProductServiceImpl implements IProductService {
 
         return productItemVo;
     }
+
+    /**
+     * 通过sku id获取
+     *
+     * @param skuId sku id
+     * @return {@link ProductSkuDto }
+     */
+    @Override
+    public ProductSku getBySkuId(Long skuId) {
+        return productSkuMapper.selectById(new LambdaQueryWrapper<ProductSku>().eq(ProductSku::getId, skuId));
+    }
 }

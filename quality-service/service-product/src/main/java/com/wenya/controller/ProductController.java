@@ -1,5 +1,6 @@
 package com.wenya.controller;
 
+import com.wenya.quality.doamin.product.ProductSku;
 import com.wenya.quality.dto.h5.ProductSkuDto;
 import com.wenya.quality.web.controller.BaseController;
 import com.wenya.quality.web.domain.AjaxResult;
@@ -49,5 +50,17 @@ public class ProductController extends BaseController {
     @GetMapping("/item/{id}")
     public AjaxResult getProductDetails(@PathVariable("id") Long id) {
         return AjaxResult.success(productService.getProductDetails(id));
+    }
+
+    /**
+     * 通过sku id获取
+     *
+     * @param skuId sku id
+     * @return {@link ProductSku }
+     */
+    @Operation(summary = "根据skuId获取产品详细信息")
+    @GetMapping("/getBySkuId/{skuId}")
+    public ProductSku getBySkuId(@PathVariable Long skuId) {
+        return productService.getBySkuId(skuId);
     }
 }

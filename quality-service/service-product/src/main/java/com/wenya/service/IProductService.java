@@ -23,5 +23,19 @@ public interface IProductService {
      */
     List<ProductSku> findByPage(int page, int limit, ProductSkuDto productSkuDto);
 
+    /**
+     * 获取产品详细信息
+     *
+     * @param id id
+     * @return {@link ProductItemVo }
+     */
     ProductItemVo getProductDetails(Long id);
+
+    /**
+     * 通过sku id获取
+     *
+     * @param skuId sku id
+     * @return {@link ProductSkuDto }
+     */
+    ProductSku getBySkuId(Long skuId);
 }
