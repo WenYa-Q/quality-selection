@@ -90,4 +90,19 @@ public class CartServiceImpl implements ICartService {
         }
         return new ArrayList<>();
     }
+
+    /**
+     * 删除购物车
+     *
+     * @param skuId sku id
+     */
+    @Override
+    public void deleteCart(Long skuId) {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+        System.out.println("用户id：" + id + "删除购物车，skuId：" + skuId);
+
+        //删除购物车中的商品
+        redisTemplate.opsForHash().delete("user:cart:" + id , String.valueOf(skuId));
+    }
 }

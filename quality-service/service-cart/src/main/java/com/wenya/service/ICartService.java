@@ -25,4 +25,11 @@ public interface ICartService {
      * @return {@link List }<{@link CartInfo }>
      */
     List<CartInfo> cartList();
+
+    /**
+     * 删除购物车
+     *
+     * @param skuId sku id
+     */
+    void deleteCart(Long skuId);
 }

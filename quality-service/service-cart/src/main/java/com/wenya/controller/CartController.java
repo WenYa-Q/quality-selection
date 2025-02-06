@@ -6,10 +6,7 @@ import com.wenya.service.ICartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 购物车控制器
@@ -48,5 +45,18 @@ public class CartController extends BaseController {
     @GetMapping("/auth/cartList")
     public AjaxResult cartList() {
         return AjaxResult.success(cartService.cartList());
+    }
+
+    /**
+     * 删除购物车
+     *
+     * @param skuId sku id
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "删除购物车")
+    @DeleteMapping("/auth/deleteCart/{skuId}")
+    public AjaxResult deleteCart(@PathVariable Long skuId) {
+        cartService.deleteCart(skuId);
+        return AjaxResult.success();
     }
 }
