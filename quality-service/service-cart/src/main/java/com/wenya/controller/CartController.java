@@ -86,4 +86,16 @@ public class CartController extends BaseController {
         cartService.allCheckCart(isChecked);
         return AjaxResult.success();
     }
+
+    /**
+     * 清空购物车
+     *
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "清空购物车")
+    @GetMapping("/auth/clearCart")
+    public AjaxResult clearCart() {
+        cartService.clearCart();
+        return AjaxResult.success();
+    }
 }

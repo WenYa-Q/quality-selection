@@ -47,4 +47,9 @@ public interface ICartService {
      * @param isChecked 已检查
      */
     void allCheckCart(Integer isChecked);
+
+    /**
+     * 清除购物车
+     */
+    void clearCart();
 }

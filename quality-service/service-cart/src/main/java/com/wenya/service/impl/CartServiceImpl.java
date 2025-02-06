@@ -153,4 +153,17 @@ public class CartServiceImpl implements ICartService {
                     });
         }
     }
+
+    /**
+     * 清除购物车
+     */
+    @Override
+    public void clearCart() {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+        System.out.println("用户id：" + id + "清空购物车");
+
+        //清空购物车
+        redisTemplate.delete("user:cart:" + id);
+    }
 }
