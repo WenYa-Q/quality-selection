@@ -1,0 +1,67 @@
+package com.wenya.service.impl;
+
+import com.alibaba.fastjson2.JSON;
+import com.wenya.product.ProductFeignClient;
+import com.wenya.quality.AuthContextUtil;
+import com.wenya.quality.doamin.h5.CartInfo;
+import com.wenya.quality.doamin.product.ProductSku;
+import com.wenya.service.ICartService;
+import jakarta.annotation.Resource;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+/**
+ * 购物车服务实施
+ * Description：
+ *
+ * @author wuqiulin
+ */
+@Service
+public class CartServiceImpl implements ICartService {
+
+    @Resource
+    private RedisTemplate<String , String> redisTemplate;
+
+    @Resource
+    private ProductFeignClient productFeignClient;
+
+    /**
+     * 添加到购物车
+     *
+     * @param skuId  sku id
+     * @param skuNum sku num
+     */
+    @Override
+    public void addToCart(Long skuId, Integer skuNum) {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+        System.out.println("用户id：" + id + "添加到购物车，skuId：" + skuId + "，skuNum：" + skuNum);
+
+        //获取缓存对象
+        Object cartInfoObj = redisTemplate.opsForHash().get("user:cart:" + id, String.valueOf(skuId));
+        CartInfo cartInfo;
+        if (cartInfoObj != null) {
+            cartInfo = JSON.parseObject(cartInfoObj.toString(), CartInfo.class);
+            cartInfo.setSkuNum(cartInfo.getSkuNum() + skuNum);
+            cartInfo.setIsChecked(1);
+            cartInfo.setUpdateTime(new Date());
+        } else {
+            cartInfo = new CartInfo();
+            ProductSku productSku = productFeignClient.getBySkuId(skuId);
+            cartInfo.setCartPrice(productSku.getSalePrice());
+            cartInfo.setSkuNum(skuNum);
+            cartInfo.setSkuId(skuId);
+            cartInfo.setUserId(id);
+            cartInfo.setImgUrl(productSku.getThumbImg());
+            cartInfo.setSkuName(productSku.getSkuName());
+            cartInfo.setIsChecked(1);
+            cartInfo.setCreateTime(new Date());
+            cartInfo.setUpdateTime(new Date());
+        }
+
+        // 将商品数据存储到购物车中
+        redisTemplate.opsForHash().put("user:cart:" + id , String.valueOf(skuId) , JSON.toJSONString(cartInfo));
+    }
+}
