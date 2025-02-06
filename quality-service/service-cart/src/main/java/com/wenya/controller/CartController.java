@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "购物车控制器")
 @RestController
-@RequestMapping("/api/order/cart")
+@RequestMapping("/api/order/cart/auth")
 public class CartController extends BaseController {
 
     @Resource
@@ -30,7 +30,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "添加到购物车")
-    @GetMapping("/auth/addToCart/{skuId}/{skuNum}")
+    @GetMapping("/addToCart/{skuId}/{skuNum}")
     public AjaxResult addToCart(@PathVariable Long skuId, @PathVariable Integer skuNum) {
         cartService.addToCart(skuId, skuNum);
         return AjaxResult.success();
@@ -42,7 +42,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "购物车列表")
-    @GetMapping("/auth/cartList")
+    @GetMapping("/cartList")
     public AjaxResult cartList() {
         return AjaxResult.success(cartService.cartList());
     }
@@ -54,7 +54,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "删除购物车")
-    @DeleteMapping("/auth/deleteCart/{skuId}")
+    @DeleteMapping("/deleteCart/{skuId}")
     public AjaxResult deleteCart(@PathVariable Long skuId) {
         cartService.deleteCart(skuId);
         return AjaxResult.success();
@@ -68,7 +68,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "修改购物车选中状态")
-    @GetMapping("/auth/checkCart/{skuId}/{isChecked}")
+    @GetMapping("/checkCart/{skuId}/{isChecked}")
     public AjaxResult checkCart(@PathVariable Long skuId, @PathVariable Integer isChecked) {
         cartService.checkCart(skuId, isChecked);
         return AjaxResult.success();
@@ -81,7 +81,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "全选购物车")
-    @GetMapping("/auth/allCheckCart/{isChecked}")
+    @GetMapping("/allCheckCart/{isChecked}")
     public AjaxResult allCheckCart(@PathVariable Integer isChecked) {
         cartService.allCheckCart(isChecked);
         return AjaxResult.success();
@@ -93,7 +93,7 @@ public class CartController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "清空购物车")
-    @GetMapping("/auth/clearCart")
+    @GetMapping("/clearCart")
     public AjaxResult clearCart() {
         cartService.clearCart();
         return AjaxResult.success();
