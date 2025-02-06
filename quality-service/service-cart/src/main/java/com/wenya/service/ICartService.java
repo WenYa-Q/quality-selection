@@ -40,4 +40,11 @@ public interface ICartService {
      * @param isChecked 已检查
      */
     void checkCart(Long skuId, Integer isChecked);
+
+    /**
+     * 全选购物车
+     *
+     * @param isChecked 已检查
+     */
+    void allCheckCart(Integer isChecked);
 }

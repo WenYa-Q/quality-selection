@@ -73,4 +73,17 @@ public class CartController extends BaseController {
         cartService.checkCart(skuId, isChecked);
         return AjaxResult.success();
     }
+
+    /**
+     * 全选购物车
+     *
+     * @param isChecked 已检查
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "全选购物车")
+    @GetMapping("/auth/allCheckCart/{isChecked}")
+    public AjaxResult allCheckCart(@PathVariable Integer isChecked) {
+        cartService.allCheckCart(isChecked);
+        return AjaxResult.success();
+    }
 }

@@ -129,4 +129,28 @@ public class CartServiceImpl implements ICartService {
             redisTemplate.opsForHash().put("user:cart:" + id , String.valueOf(skuId) , JSON.toJSONString(cartInfo));
         }
     }
+
+    /**
+     * 全选购物车
+     *
+     * @param isChecked 已检查
+     */
+    @Override
+    public void allCheckCart(Integer isChecked) {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+        System.out.println("用户id：" + id + "全选购物车，isChecked：" + isChecked);
+
+        //获取缓存对象
+        List<Object> cartInfoList = redisTemplate.opsForHash().values("user:cart:" + id);
+        if (!CollectionUtils.isEmpty(cartInfoList)) {
+            cartInfoList.stream().map(cartInfoObj -> JSON.parseObject(cartInfoObj.toString(), CartInfo.class))
+                    .forEach(cartInfo -> {
+                        cartInfo.setIsChecked(isChecked);
+                        cartInfo.setUpdateTime(new Date());
+                        //将商品数据存储到购物车中
+                        redisTemplate.opsForHash().put("user:cart:" + id , String.valueOf(cartInfo.getSkuId()) , JSON.toJSONString(cartInfo));
+                    });
+        }
+    }
 }
