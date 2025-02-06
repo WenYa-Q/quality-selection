@@ -32,4 +32,12 @@ public interface ICartService {
      * @param skuId sku id
      */
     void deleteCart(Long skuId);
+
+    /**
+     * 修改购物车选中状态
+     *
+     * @param skuId     sku id
+     * @param isChecked 已检查
+     */
+    void checkCart(Long skuId, Integer isChecked);
 }

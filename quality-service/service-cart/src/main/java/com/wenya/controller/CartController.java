@@ -59,4 +59,18 @@ public class CartController extends BaseController {
         cartService.deleteCart(skuId);
         return AjaxResult.success();
     }
+
+    /**
+     * 修改购物车选中状态
+     *
+     * @param skuId     sku id
+     * @param isChecked 已检查
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "修改购物车选中状态")
+    @GetMapping("/auth/checkCart/{skuId}/{isChecked}")
+    public AjaxResult checkCart(@PathVariable Long skuId, @PathVariable Integer isChecked) {
+        cartService.checkCart(skuId, isChecked);
+        return AjaxResult.success();
+    }
 }

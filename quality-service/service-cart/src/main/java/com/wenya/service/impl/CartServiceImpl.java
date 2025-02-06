@@ -105,4 +105,28 @@ public class CartServiceImpl implements ICartService {
         //删除购物车中的商品
         redisTemplate.opsForHash().delete("user:cart:" + id , String.valueOf(skuId));
     }
+
+    /**
+     * 修改购物车选中状态
+     *
+     * @param skuId     sku id
+     * @param isChecked 已检查
+     */
+    @Override
+    public void checkCart(Long skuId, Integer isChecked) {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+
+        //获取缓存对象
+        Boolean hasKey = redisTemplate.opsForHash().hasKey("user:cart:" + id, String.valueOf(skuId));
+        if (hasKey) {
+            Object cartInfoObj = redisTemplate.opsForHash().get("user:cart:" + id, String.valueOf(skuId));
+            assert cartInfoObj != null;
+            CartInfo cartInfo = JSON.parseObject(cartInfoObj.toString(), CartInfo.class);
+            cartInfo.setIsChecked(isChecked);
+            cartInfo.setUpdateTime(new Date());
+            //将商品数据存储到购物车中
+            redisTemplate.opsForHash().put("user:cart:" + id , String.valueOf(skuId) , JSON.toJSONString(cartInfo));
+        }
+    }
 }
