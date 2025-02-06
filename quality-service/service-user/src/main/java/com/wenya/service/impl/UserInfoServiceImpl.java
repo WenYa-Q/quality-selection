@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wenya.mapper.UserInfoMapper;
+import com.wenya.quality.AuthContextUtil;
 import com.wenya.quality.doamin.user.UserInfo;
 import com.wenya.quality.dto.h5.UserLoginDto;
 import com.wenya.quality.dto.h5.UserRegisterDto;
@@ -12,6 +13,7 @@ import com.wenya.quality.exception.BusinessCustomizeException;
 import com.wenya.quality.vo.common.ResultCodeEnum;
 import com.wenya.quality.vo.h5.UserInfoVo;
 import com.wenya.service.IUserInfoService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -94,7 +96,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         // 获取数据
         String username = userLoginDto.getUsername();
         String password = userLoginDto.getPassword();
-        if (StringUtils.hasText(username) || StringUtils.hasText(password)) {
+        if (!StringUtils.hasText(username) || !StringUtils.hasText(password)) {
             throw new BusinessCustomizeException(ResultCodeEnum.DATA_ERROR);
         }
 
@@ -130,13 +132,14 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      */
     @Override
     public UserInfoVo getCurrentUserInfo(HttpServerRequest request) {
-        String token = request.getHeader("token");
-        if (StringUtils.hasText(token)) {
-            String userJson = redisTemplate.opsForValue().get("user:spzx:token:" + token);
-            if (StringUtils.hasText(userJson)) {
-                return JSONObject.parseObject(userJson, UserInfoVo.class);
-            }
+        UserInfo userInfo = AuthContextUtil.getUserInfo();
+        if(null == userInfo) {
+            throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_AUTH);
         }
-        throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_AUTH);
+
+        UserInfoVo userInfoVo = new UserInfoVo();
+        BeanUtils.copyProperties(userInfo, userInfoVo);
+
+        return userInfoVo;
     }
 }

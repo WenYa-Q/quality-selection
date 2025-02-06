@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "用户信息", description = "用户信息控制器")
 @RestController
-@RequestMapping("/api/user/userInfo")
+@RequestMapping("/api/user")
 public class UserInfoController extends BaseController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class UserInfoController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "注册")
-    @PostMapping("/register")
+    @PostMapping("/userInfo/register")
     public AjaxResult register(@RequestBody UserRegisterDto userRegisterDto) {
         userInfoService.register(userRegisterDto);
         return AjaxResult.success();
@@ -45,7 +45,7 @@ public class UserInfoController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "登录")
-    @PostMapping("/login")
+    @PostMapping("/userInfo/login")
     public AjaxResult login(@RequestBody UserLoginDto userLoginDto) {
         return AjaxResult.success(userInfoService.login(userLoginDto));
     }
@@ -56,7 +56,7 @@ public class UserInfoController extends BaseController {
      * @return {@link AjaxResult }
      */
     @Operation(summary = "获取当前用户信息")
-    @GetMapping("/getCurrentUserInfo")
+    @GetMapping("/auth/getCurrentUserInfo")
     public AjaxResult getCurrentUserInfo(HttpServerRequest request) {
         return AjaxResult.success(userInfoService.getCurrentUserInfo(request));
     }
