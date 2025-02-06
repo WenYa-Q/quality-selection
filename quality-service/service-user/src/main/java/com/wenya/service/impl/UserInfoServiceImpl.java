@@ -1,6 +1,5 @@
 package com.wenya.service.impl;
 
-import cn.hutool.http.server.HttpServerRequest;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,6 +12,7 @@ import com.wenya.quality.exception.BusinessCustomizeException;
 import com.wenya.quality.vo.common.ResultCodeEnum;
 import com.wenya.quality.vo.h5.UserInfoVo;
 import com.wenya.service.IUserInfoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -131,7 +131,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      * @return {@link UserInfoVo }
      */
     @Override
-    public UserInfoVo getCurrentUserInfo(HttpServerRequest request) {
+    public UserInfoVo getCurrentUserInfo(HttpServletRequest request) {
         UserInfo userInfo = AuthContextUtil.getUserInfo();
         if(null == userInfo) {
             throw new BusinessCustomizeException(ResultCodeEnum.LOGIN_AUTH);
@@ -141,5 +141,21 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         BeanUtils.copyProperties(userInfo, userInfoVo);
 
         return userInfoVo;
+    }
+
+    /**
+     * 注销
+     *
+     * @param request 请求
+     */
+    @Override
+    public void logout(HttpServletRequest request) {
+        //获取token
+        String token = request.getHeader("token");
+        if(StringUtils.hasText(token)) {
+            redisTemplate.delete("user:spzx:token:" + token);
+
+            AuthContextUtil.removeUserInfo();
+        }
     }
 }
