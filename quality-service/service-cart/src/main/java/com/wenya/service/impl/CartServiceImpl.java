@@ -9,8 +9,12 @@ import com.wenya.service.ICartService;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 购物车服务实施
@@ -63,5 +67,27 @@ public class CartServiceImpl implements ICartService {
 
         // 将商品数据存储到购物车中
         redisTemplate.opsForHash().put("user:cart:" + id , String.valueOf(skuId) , JSON.toJSONString(cartInfo));
+    }
+
+    /**
+     * 购物车列表
+     *
+     * @return {@link List }<{@link CartInfo }>
+     */
+    @Override
+    public List<CartInfo> cartList() {
+        //获取当前登录用户id
+        Long id = AuthContextUtil.getUserInfo().getId();
+        System.out.println("用户id：" + id + "查询购物车列表");
+
+        //获取缓存对象
+        List<Object> cartInfoList = redisTemplate.opsForHash().values("user:cart:" + id);
+        if (!CollectionUtils.isEmpty(cartInfoList)) {
+
+            return cartInfoList.stream().map(cartInfoObj -> JSON.parseObject(cartInfoObj.toString(), CartInfo.class))
+                    .sorted((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()))
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 }

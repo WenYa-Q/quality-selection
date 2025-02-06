@@ -38,4 +38,15 @@ public class CartController extends BaseController {
         cartService.addToCart(skuId, skuNum);
         return AjaxResult.success();
     }
+
+    /**
+     * 购物车列表
+     *
+     * @return {@link AjaxResult }
+     */
+    @Operation(summary = "购物车列表")
+    @GetMapping("/auth/cartList")
+    public AjaxResult cartList() {
+        return AjaxResult.success(cartService.cartList());
+    }
 }

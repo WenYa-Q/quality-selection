@@ -1,5 +1,9 @@
 package com.wenya.service;
 
+import com.wenya.quality.doamin.h5.CartInfo;
+
+import java.util.List;
+
 /**
  * 购物车服务
  * Description：
@@ -14,4 +18,11 @@ public interface ICartService {
      * @param skuNum sku num
      */
     void addToCart(Long skuId, Integer skuNum);
+
+    /**
+     * 购物车列表
+     *
+     * @return {@link List }<{@link CartInfo }>
+     */
+    List<CartInfo> cartList();
 }
