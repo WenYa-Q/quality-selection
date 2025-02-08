@@ -16,17 +16,19 @@ SpringBoot +  Mybatis-Plus + Spring Cloud Alibaba + EasyExcel + Minio + 短信�
 
 ## 模块说明
 
- [quality-api](D:\GitHub\quality-selection\quality-api)：接口调用模块
+ quality-api：接口调用模块
 
- [quality-common](D:\GitHub\quality-selection\quality-common)：通用工具类模块
+ quality-common：通用工具类模块
 
- [quality-gateway](D:\GitHub\quality-selection\quality-gateway)：网关模块
+ quality-gateway：网关模块
 
- [quality-manager](D:\GitHub\quality-selection\quality-manager)：后端业务模块
+ quality-manager：后端业务模块
 
- [quality-model](D:\GitHub\quality-selection\quality-model)：实体类模块
+ quality-model：实体类模块
 
- [quality-service](D:\GitHub\quality-selection\quality-service)：H5后端业务模块
+ quality-service：H5后端业务模块
+
+
 
 
 
